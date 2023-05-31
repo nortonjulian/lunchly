@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit {{ customer.firstName }} {{ customer.lastName }}{% endblock %}
+{% block title %}Edit {{ customer.fullName }}{% endblock %}
 
 {% block content %}
 
@@ -37,5 +37,5 @@
   <button class="btn btn-primary">Add</button>
   <a href="/{{ customer.id }}/" class="btn btn-danger">Cancel</a>
 </form>
-  
+
 {% endblock %}

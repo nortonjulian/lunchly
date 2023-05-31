@@ -14,14 +14,30 @@ class Customer {
     this.notes = notes;
   }
 
+  set notes(val) {
+    this._notes = val || "";
+  }
+
+  get notes() {
+    return this._notes
+  }
+
+  set phone(val) {
+    this._phone = val || null;
+  }
+
+  get phone() {
+    return this._phone;
+  }
+
   /** find all customers. */
 
   static async all() {
     const results = await db.query(
-      `SELECT id, 
-         first_name AS "firstName",  
-         last_name AS "lastName", 
-         phone, 
+      `SELECT id,
+         first_name AS "firstName",
+         last_name AS "lastName",
+         phone,
          notes
        FROM customers
        ORDER BY last_name, first_name`
@@ -33,11 +49,11 @@ class Customer {
 
   static async get(id) {
     const results = await db.query(
-      `SELECT id, 
-         first_name AS "firstName",  
-         last_name AS "lastName", 
-         phone, 
-         notes 
+      `SELECT id,
+         first_name AS "firstName",
+         last_name AS "lastName",
+         phone,
+         notes
         FROM customers WHERE id = $1`,
       [id]
     );
@@ -51,6 +67,10 @@ class Customer {
     }
 
     return new Customer(customer);
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
   }
 
   /** get all reservations for this customer. */
